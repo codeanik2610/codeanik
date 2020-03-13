@@ -26,15 +26,18 @@ const Home = () => {
   });
 
   useEffect(() => {
+    setscannedCode('');
     dispatch(actions.getAllSlides());
   }, [dispatch]);
 
   useEffect(() => {
     setsliderData(allSlides);
+    setscannedCode('');
     dispatch(actions.getImageDetails(1));
   }, [allSlides, dispatch]);
 
   useEffect(() => {
+    setscannedCode('');
     setdescriptionData(slideDescription);
   }, [slideDescription]);
 
@@ -43,7 +46,6 @@ const Home = () => {
     dispatch(actions.getImageDetails(imageId));
   };
   const getScanCode = val => {
-    console.log(val.data.qrCode);
     setscannedCode(val.data.qrCode);
   };
   return (

@@ -25,11 +25,13 @@ router.post('/getcode', (req, res) => {
         res.send(resObj);
       })
       .catch(err => {
+        console.log(err);
         resObj.status = 500;
         resObj.imagePath = '';
         res.send(resObj);
       });
   } catch (error) {
+    console.log(eerrorrr);
     resObj.status = 500;
     resObj.imagePath = '';
     res.send(resObj);
@@ -41,7 +43,8 @@ router.post('/getQrcode', (req, res) => {
     status: 200,
     qrCode: ''
   };
-  const image = path.resolve(__dirname, '../../' + req.body.url);
+  // const image = path.resolve(__dirname, '../../' + req.body.url);
+  const image = req.body.url;
   const worker = createWorker();
   try {
     if (req.body.url !== '') {

@@ -7,24 +7,43 @@ import { TESSERACT_URL } from '../../constanst';
 const ScanBox = props => {
   const { label = 'scan Now', data, getScanCode } = props;
   const [buttonLabel, setLabel] = useState();
+  const [errMsg, seterrMsg] = useState();
 
   const scanNowHandler = async () => {
     setLabel('scanning...');
     if (data.data[0].url) {
+      // let reqData = {
+      //   url: data.data[0].url
+      // };
+      // console.log(reqData);
+      // axios
+      //   .post(`${TESSERACT_URL}getcode`, reqData)
+      //   .then(response => {
+      //     console.log(response);
+      //     if (response.data.status === 200) {
+      //       getQrCode(response.data.imagePath);
+      //     }
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //   });
       let reqData = {
         url: data.data[0].url
       };
-      console.log(reqData);
       axios
-        .post(`${TESSERACT_URL}getcode`, reqData)
-        .then(response => {
-          console.log(response);
-          if (response.data.status === 200) {
-            getQrCode(response.data.imagePath);
+        .post(`${TESSERACT_URL}getQrcode`, reqData)
+        .then(function(response) {
+          if ((response.status = 200)) {
+            setLabel(label);
+            getScanCode(response);
+          } else {
+            setLabel(label);
+            seterrMsg('Some thing went wrong');
           }
         })
         .catch(function(error) {
-          console.log(error);
+          setLabel(label);
+          seterrMsg('Some thing went wrong');
         });
     }
   };
@@ -61,6 +80,7 @@ const ScanBox = props => {
           >
             {buttonLabel}
           </Button>
+          <div className="">{errMsg}</div>
         </div>
       )}
     </>
