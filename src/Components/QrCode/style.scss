@@ -1,0 +1,15 @@
+.scanned-wrapper {
+  width: 50%;
+  border: 1px solid #000;
+  height: 40px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 30px;
+  .qrcode {
+    padding: 1px;
+    /* margin: 10px; */
+    position: relative;
+    display: block;
+    font-size: 20px;
+  }
+}
